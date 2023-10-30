@@ -18,30 +18,30 @@ import { SSUElitAPI } from "../services/api/SSUElitApi";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState(dummyMessages);
-  const [listMsg, setListMsg] = useState([]);
   const [userMessage, setUserMessage] = useState("");
+  const [userPrompt, setUserPrompt] = useState("");
 
+  const api = new SSUElitAPI();
   function handleOnChangeText(text: string) {
     setUserMessage(text);
   }
-  function handleOnPressButton() {
-    setListMsg([...listMsg, userMessage]);
-    setUserMessage("");
-  }
-  console.log("This is listMsg ", listMsg);
-
-  const api = new SSUElitAPI();
-
-  const [responseData, setResponseData] = useState(null);
 
   useEffect(() => {
-    api.sendAIRequest({ prompt: "Що це СУМДУ?" }).then((datatest) => {
-      console.log("this is true data", datatest);
-      setResponseData(datatest);
-    });
-  }, []);
+    if (userPrompt !== "") {
+      api.sendAIRequest({ prompt: userPrompt }).then((datatest) => {
+        console.log("API response: ", datatest);
+        setMessages([...messages, { role: "bot", content: datatest.body }]);
+        setUserPrompt("");
+      });
+    }
+  }, [userPrompt]);
 
-  console.log("This is responseData", responseData);
+  function handleOnPressButton() {
+    console.log("Button pressed!");
+    setUserMessage("");
+    setUserPrompt(userMessage);
+    setMessages([...messages, { role: "user", content: userMessage }]);
+  }
 
   return (
     <SafeAreaView className="flex-1 py-10 justify-center bg-white">
