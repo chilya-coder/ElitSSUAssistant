@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { dummyMessages } from "./dummyMessages";
 import {
   widthPercentageToDP as wp,
@@ -14,12 +14,13 @@ import {
 } from "react-native-responsive-screen";
 
 import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
+import { SSUElitAPI } from "../services/api/SSUElitApi";
 
-//fix bug with AutoGrowingTextInput
 export default function ChatScreen() {
   const [messages, setMessages] = useState(dummyMessages);
   const [listMsg, setListMsg] = useState([]);
   const [userMessage, setUserMessage] = useState("");
+
   function handleOnChangeText(text: string) {
     setUserMessage(text);
   }
@@ -28,6 +29,20 @@ export default function ChatScreen() {
     setUserMessage("");
   }
   console.log("This is listMsg ", listMsg);
+
+  const api = new SSUElitAPI();
+
+  const [responseData, setResponseData] = useState(null);
+
+  useEffect(() => {
+    api.sendAIRequest({ prompt: "Що це СУМДУ?" }).then((datatest) => {
+      console.log("this is true data", datatest);
+      setResponseData(datatest);
+    });
+  }, []);
+
+  console.log("This is responseData", responseData);
+
   return (
     <SafeAreaView className="flex-1 py-10 justify-center bg-white">
       <View className="flex-row mx-5 mt-14 mb-5 justify-center">
