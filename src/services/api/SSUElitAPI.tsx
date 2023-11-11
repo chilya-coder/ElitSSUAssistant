@@ -1,12 +1,12 @@
+import ElitSSUAssistantStrings from "../../ElitSSUAssistantStrings.json";
+
 interface HumanPrompt {
   prompt: string;
 }
 
-const serverAddress = process.env.SERVER_ADDRESS;
-
 export class SSUElitAPI {
   async sendAIRequest(properties: HumanPrompt) {
-    return fetch(`http://${serverAddress}:8080/chatbot`, {
+    return fetch(`ip_address/chatbot`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ prompt: properties.prompt }),
@@ -17,6 +17,8 @@ export class SSUElitAPI {
         }
         return await response.json();
       })
-      .catch((error) => console.error("This is error", error));
+      .catch((error) => {
+        console.error(ElitSSUAssistantStrings.request_failed, error);
+      });
   }
 }

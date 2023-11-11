@@ -8,6 +8,9 @@
     "elit_events_option_description": "Find out about upcoming ELIT events.",
     "welcome_message": "Your gateway to your ELIT life.",
     "welcome_title": " 🇺🇦 SSU ELITHub",
-    "welcome_button_message": "Get Started!"
-    
+    "welcome_button_message": "Get Started!",
+    "internal_server_error": "Sorry, failed to catch a response due to internal server error.",
+    "send_message_placeholder": "Send a message",
+    "loading_message": "Loading...",
+    "request_failed": "SSUElitAPI GET sendAIRequest failed"
 }
