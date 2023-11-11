@@ -12,15 +12,12 @@ import {
 } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
 import ElitSSUAssistantStrings from "../ElitSSUAssistantStrings.json";
-import { FontAwesomeIcon } from "@fortawesome/react-native-fontawesome";
-import { faMugHot } from "@fortawesome/free-solid-svg-icons";
 
 export default function WelcomeScreen() {
   const navigation = useNavigation();
   return (
     <SafeAreaView className="flex-1 flex justify-around bg-white">
       <View className="spacy-y-2">
-        <FontAwesomeIcon icon={faMugHot} />
         <Text
           style={{ fontSize: wp(8) }}
           className="text-center font-bold text-grey-700"

@@ -1,10 +1,12 @@
-import { View, Text } from "react-native";
+import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 
 export default function EventsScreen() {
   return (
-    <View>
-      <Text>EventsScreen</Text>
-    </View>
+    <SafeAreaView className="flex-1 flex justify-around bg-white">
+      <View className="flex-row justify-center">
+        <Text>EventsScreen</Text>
+      </View>
+    </SafeAreaView>
   );
 }

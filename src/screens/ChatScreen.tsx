@@ -97,9 +97,14 @@ export default function ChatScreen() {
           </TouchableOpacity>
           <Text
             className="pt-1"
-            style={{ fontSize: 16, fontWeight: "bold", textAlign: "right" }}
+            style={{
+              fontSize: 16,
+              fontWeight: "bold",
+              textAlign: "right",
+              color: "grey",
+            }}
           >
-            ELIT Bot
+            ELIT AI Assistant
           </Text>
         </View>
       </View>
@@ -111,7 +116,7 @@ export default function ChatScreen() {
           showsVerticalScrollIndicator={false}
         >
           {messages.length === 0 && (
-            <View className="pt-40 pl-5" style={{ alignItems: "center" }}>
+            <View className="pt-40" style={{ alignItems: "center" }}>
               <LottieView
                 style={{
                   height: 130,
@@ -178,7 +183,7 @@ export default function ChatScreen() {
           })}
         </ScrollView>
       }
-      <View>
+      <View style={{ flexDirection: "row" }}>
         <AutoGrowingTextInput
           value={userInput}
           placeholder={ElitSSUAssistantStrings.send_message_placeholder}
@@ -200,11 +205,12 @@ export default function ChatScreen() {
             elevation: 2,
           }}
         ></AutoGrowingTextInput>
+
         <TouchableOpacity
           className={"rounded-3xl p-3 absolute right-4 bg-blue-50"}
           style={{
-            width: wp(14),
-            height: hp(7),
+            width: wp(13),
+            height: hp(6.5),
             shadowColor: "#000",
             shadowOffset: {
               width: 0,
@@ -216,14 +222,22 @@ export default function ChatScreen() {
           }}
           onPress={handleOnPressButton}
         >
-          <Image
-            className="mx-1 my-1"
-            source={require("../../assets/images/push-icon.png")}
+          <View
             style={{
-              height: hp(3),
-              width: hp(3),
+              flex: 1,
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          ></Image>
+          >
+            <Image
+              className="mx-1 my-1"
+              source={require("../../assets/images/push-icon.png")}
+              style={{
+                height: hp(3),
+                width: hp(3),
+              }}
+            ></Image>
+          </View>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
