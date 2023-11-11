@@ -16,17 +16,19 @@ import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
 import { SSUElitAPI } from "../services/api/SSUElitApi";
 import LottieView from "lottie-react-native";
 import ElitSSUAssistantStrings from "../ElitSSUAssistantStrings.json";
+import { useNavigation } from "@react-navigation/native";
 
 export default function ChatScreen() {
+  const navigation = useNavigation();
   const [messages, setMessages] = useState([]);
-  const [userMessage, setUserMessage] = useState("");
+  const [userInput, setUserInput] = useState("");
   const [userPrompt, setUserPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const api = new SSUElitAPI();
 
   function handleOnChangeText(text: string) {
-    setUserMessage(text);
+    setUserInput(text);
   }
 
   useEffect(() => {
@@ -57,22 +59,23 @@ export default function ChatScreen() {
   }, [userPrompt]);
 
   function handleOnPressButton() {
-    console.log("User input", userMessage);
-    if (!/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s\p{P}]+$/u.test(userMessage)) {
+    console.log("User final input", userInput);
+    if (!/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s\p{P}]+$/u.test(userInput)) {
       return;
     }
-    setUserPrompt(userMessage);
+    setUserPrompt(userInput);
     setIsLoading(true);
-    setUserMessage("");
-    setMessages([...messages, { role: "user", content: userMessage }]);
+    setUserInput("");
+    setMessages([...messages, { role: "user", content: userInput }]);
   }
-  console.log("Check it", messages);
+  console.log("User input changed", userInput);
   return (
     <SafeAreaView className="flex-1 pb-4 justify-center bg-white">
       <View
+        className="bg-blue-50"
         style={{
-          backgroundColor: "#F5F5F5",
-          padding: 25,
+          // backgroundColor: "#F5F5F5",
+          padding: 15,
         }}
       >
         <View
@@ -82,14 +85,18 @@ export default function ChatScreen() {
           }}
           className="mt-5"
         >
-          <TouchableOpacity>
-            <Text
-              style={{ fontSize: 16, fontWeight: "bold", textAlign: "left" }}
-            >
-              Hello
-            </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+            <Image
+              className="mx-1 my-1"
+              source={require("../../assets/images/back-icon.png")}
+              style={{
+                height: hp(3),
+                width: hp(3),
+              }}
+            ></Image>
           </TouchableOpacity>
           <Text
+            className="pt-1"
             style={{ fontSize: 16, fontWeight: "bold", textAlign: "right" }}
           >
             ELIT Bot
@@ -102,13 +109,12 @@ export default function ChatScreen() {
           bounces={false}
           className="space-y-5 mx-5 mt-3 mb-3"
           showsVerticalScrollIndicator={false}
-          // style={{ backgroundColor: "#7FFFD4" }}
         >
           {messages.length === 0 && (
             <View className="pt-40 pl-5" style={{ alignItems: "center" }}>
               <LottieView
                 style={{
-                  height: 150,
+                  height: 130,
                   alignContent: "center",
                 }}
                 source={require("../../assets/images/lottie/welcome_bot.json")}
@@ -116,9 +122,9 @@ export default function ChatScreen() {
               />
               <Text
                 className="mt-3"
-                style={{ fontSize: 16, fontWeight: "bold" }}
+                style={{ fontSize: 16, fontWeight: "bold", color: "grey" }}
               >
-                Hi! Ask me anything about ELIT.
+                {ElitSSUAssistantStrings.chat_bot_greeting}
               </Text>
             </View>
           )}
@@ -131,14 +137,6 @@ export default function ChatScreen() {
                       backgroundColor: "#F5F5F5",
                       borderRadius: 10,
                       padding: 10,
-                      // shadowColor: "#000",
-                      // shadowOffset: {
-                      //   width: 1,
-                      //   height: 1,
-                      // },
-                      // shadowOpacity: 0.22,
-                      // shadowRadius: 2.22,
-                      // elevation: 3,
                     }}
                     className="rounded-3xl p-4 rounded-tr-none"
                   >
@@ -182,14 +180,13 @@ export default function ChatScreen() {
       }
       <View>
         <AutoGrowingTextInput
-          value={userMessage}
+          value={userInput}
           placeholder={ElitSSUAssistantStrings.send_message_placeholder}
           onChangeText={handleOnChangeText}
           placeholderTextColor={"grey"}
           multiline={true}
           className="rounded-3xl p-3 left-4 bg-blue-50"
           style={{
-            // backgroundColor: "#F5F5F5",
             width: wp(75),
             height: hp(7.5),
             shadowColor: "#000",
@@ -206,7 +203,6 @@ export default function ChatScreen() {
         <TouchableOpacity
           className={"rounded-3xl p-3 absolute right-4 bg-blue-50"}
           style={{
-            //backgroundColor: "#F5F5F5",
             width: wp(14),
             height: hp(7),
             shadowColor: "#000",
@@ -222,7 +218,7 @@ export default function ChatScreen() {
         >
           <Image
             className="mx-1 my-1"
-            source={require("../../assets/images/sendicon.png")}
+            source={require("../../assets/images/push-icon.png")}
             style={{
               height: hp(3),
               width: hp(3),

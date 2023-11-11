@@ -12,5 +12,7 @@
     "internal_server_error": "Sorry, failed to catch a response due to internal server error.",
     "send_message_placeholder": "Send a message",
     "loading_message": "Loading...",
-    "request_failed": "SSUElitAPI GET sendAIRequest failed"
+    "request_failed": "SSUElitAPI GET sendAIRequest failed",
+    "chat_bot_greeting": "Hi! Ask me anything about ELIT."
+
 }
