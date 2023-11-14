@@ -6,6 +6,7 @@ import HomeScreen from "../screens/HomeScreen";
 import ChatScreen from "../screens/ChatScreen";
 import MapsScreen from "../screens/MapsScreen";
 import EventsScreen from "../screens/EventsScreen";
+import EventDetailsScreen from "../screens/EventDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,6 +22,7 @@ export default function AppNavigation() {
         <Stack.Screen name="Chat" component={ChatScreen} />
         <Stack.Screen name="Maps" component={MapsScreen} />
         <Stack.Screen name="Events" component={EventsScreen} />
+        <Stack.Screen name="EventDetails" component={EventDetailsScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

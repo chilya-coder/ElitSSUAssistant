@@ -13,6 +13,7 @@
     "send_message_placeholder": "Send a message",
     "loading_message": "Loading...",
     "request_failed": "SSUElitAPI GET sendAIRequest failed",
-    "chat_bot_greeting": "Hi! Ask me anything about ELIT."
+    "chat_bot_greeting": "Hi! Ask me anything about ELIT.",
+    "elit_ai_assistant": "ELIT AI Assistant"
 
 }

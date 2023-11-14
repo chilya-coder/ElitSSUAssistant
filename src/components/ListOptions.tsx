@@ -20,21 +20,21 @@ export default function ListOptions() {
       <Option
         title={ElitSSUAssistantString.ai_chat_option_title}
         description={ElitSSUAssistantString.ai_chat_option_description}
-        color={"bg-cyan-100"}
+        color={"bg-blue-50"}
         option={"Chat"}
       />
 
-      <Option
+      {/* <Option
         title={ElitSSUAssistantString.elit_maps_option_title}
         description={ElitSSUAssistantString.elit_maps_option_description}
         color={"bg-green-100"}
         option={"Maps"}
-      />
+      /> */}
 
       <Option
         title={ElitSSUAssistantString.elit_events_option_title}
         description={ElitSSUAssistantString.elit_events_option_description}
-        color={"bg-red-100"}
+        color={"bg-blue-50"}
         option={"Events"}
       />
     </View>

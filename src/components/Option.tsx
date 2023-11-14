@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text, TouchableOpacity } from "react-native";
+import { View, Text, TouchableOpacity } from "react-native";
 import React from "react";
 import { widthPercentageToDP as wp } from "react-native-responsive-screen";
 import { useNavigation } from "@react-navigation/native";
@@ -10,10 +10,6 @@ interface OptionProps {
   option: "Chat" | "Maps" | "Events";
 }
 
-// TODO:
-// double check about shadow, e.g. shadow-xl w-full shadow-black/50
-// check problem with navigation { name: option }
-
 export default function Option({
   title,
   description,
@@ -23,7 +19,9 @@ export default function Option({
   const navigation = useNavigation();
   return (
     <TouchableOpacity onPress={() => navigation.navigate({ name: option })}>
-      <View className={color + " p-4 rounded-xl space-y-2 mt-5"}>
+      <View
+        className={color + " pt-3 pb-3 pl-3 pr-3 rounded-3xl space-y-2 mt-5"}
+      >
         <View className="flex-row items-center">
           <Text style={{ fontSize: wp(4.8) }} className="font-semibold ">
             {title}
