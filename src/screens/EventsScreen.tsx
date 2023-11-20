@@ -1,6 +1,7 @@
 import { View, Text, SafeAreaView } from "react-native";
 import React from "react";
 
+// TEST
 export default function EventsScreen() {
   return (
     <SafeAreaView className="flex-1 flex justify-around bg-white">
