@@ -13,12 +13,13 @@ import {
 } from "react-native-responsive-screen";
 
 import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
-import { SSUElitAPI } from "../services/api/SSUElitApi";
+
 import LottieView from "lottie-react-native";
 import ElitSSUAssistantStrings from "../ElitSSUAssistantStrings.json";
 import icons from "../../constants/icons";
 import animations from "../../constants/animations";
 import { Header } from "../components/Header";
+import { SSUElitAPI } from "../services/api/SSUElitAPI";
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState([]);
@@ -75,7 +76,10 @@ export default function ChatScreen() {
 
   return (
     <SafeAreaView className="flex-1 pb-4 mt-0 justify-center bg-white">
-      <Header color={"bg-blue-50"} />
+      <Header
+        color={"bg-blue-50"}
+        headerText={ElitSSUAssistantStrings.elit_ai_bot}
+      />
       <ScrollView
         bounces={false}
         className="space-y-5 mx-5 mt-3 mb-3"

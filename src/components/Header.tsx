@@ -7,14 +7,15 @@ import {
 } from "react-native-responsive-screen";
 interface HeaderProps {
   color: string;
+  headerText: string;
 }
-export function Header({ color }: HeaderProps) {
+export function Header({ color, headerText }: HeaderProps) {
   const navigation = useNavigation();
   return (
     <View
       className={color}
       style={{
-        padding: 15,
+        padding: hp(3),
       }}
     >
       <View
@@ -22,7 +23,6 @@ export function Header({ color }: HeaderProps) {
           flexDirection: "row",
           justifyContent: "space-between",
         }}
-        className="mt-5"
       >
         <TouchableOpacity onPress={() => navigation.navigate("Home")}>
           <Image
@@ -43,7 +43,7 @@ export function Header({ color }: HeaderProps) {
             color: "grey",
           }}
         >
-          ELIT Events
+          {headerText}
         </Text>
       </View>
     </View>
