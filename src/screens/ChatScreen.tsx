@@ -1,20 +1,22 @@
+import React, { useEffect, useState } from "react";
 import {
   View,
-  SafeAreaView,
   Text,
   ScrollView,
+  Switch,
+  SafeAreaView,
   TouchableOpacity,
   Image,
 } from "react-native";
-import React, { useEffect, useState } from "react";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-
 import { AutoGrowingTextInput } from "react-native-autogrow-textinput";
-
 import LottieView from "lottie-react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import * as Clipboard from "expo-clipboard";
+
 import ElitSSUAssistantStrings from "../ElitSSUAssistantStrings.json";
 import icons from "../../constants/icons";
 import animations from "../../constants/animations";
@@ -26,33 +28,44 @@ export default function ChatScreen() {
   const [userInput, setUserInput] = useState("");
   const [userPrompt, setUserPrompt] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isEnabled, setIsEnabled] = useState(false);
+  const [language, setLanguage] = useState("en");
 
-  const api = new SSUElitAPI();
-
-  function handleOnChangeText(text: string) {
-    setUserInput(text);
-  }
+  const toggleSwitch = () => {
+    setLanguage((prevLanguage) => (prevLanguage === "en" ? "ua" : "en"));
+    setIsEnabled((prevIsEnabled) => !prevIsEnabled);
+  };
 
   useEffect(() => {
-    // if user sends a message but reply is not yet received -
-    // generate a loading animation
+    console.log("Language changed to: ", language);
+  }, [language]);
+
+  const ssuElitApi = new SSUElitAPI();
+
+  const handleOnChangeText = (text) => {
+    setUserInput(text);
+  };
+
+  useEffect(() => {
     if (userPrompt !== "" && isLoading) {
-      setMessages([
-        ...messages,
+      setMessages((prevMessages) => [
+        ...prevMessages,
         { role: "bot", content: ElitSSUAssistantStrings.loading_message },
       ]);
-      // triger SSU ELIT API only if userPrompt is not empty
-      api
-        .sendAIRequest({ prompt: userPrompt })
-        .then((datatest) => {
+      ssuElitApi
+        .sendAIRequest({ prompt: userPrompt, language })
+        .then((response) => {
           setIsLoading(false);
-          setMessages([...messages, { role: "bot", content: datatest.body }]);
-          console.log("AI API response: ", datatest.body);
+          setMessages((prevMessages) => [
+            ...prevMessages,
+            { role: "bot", content: response.body },
+          ]);
+          console.log("AI API response: ", response.body);
           setUserPrompt("");
         })
         .catch((error) => {
-          setMessages([
-            ...messages,
+          setMessages((prevMessages) => [
+            ...prevMessages,
             {
               role: "bot",
               content: ElitSSUAssistantStrings.internal_server_error,
@@ -63,7 +76,7 @@ export default function ChatScreen() {
     }
   }, [userPrompt]);
 
-  function handleOnPressButton() {
+  const handleOnPressButton = () => {
     console.log("User final input", userInput);
     if (!/^[a-zA-Zа-яА-ЯёЁіІїЇєЄ\s\p{P}]+$/u.test(userInput)) {
       return;
@@ -71,42 +84,87 @@ export default function ChatScreen() {
     setUserPrompt(userInput);
     setIsLoading(true);
     setUserInput("");
-    setMessages([...messages, { role: "user", content: userInput }]);
-  }
+    setMessages((prevMessages) => [
+      ...prevMessages,
+      { role: "user", content: userInput },
+    ]);
+  };
 
   return (
     <SafeAreaView className="flex-1 pb-4 mt-0 justify-center bg-white">
       <Header
         color={"bg-blue-50"}
-        headerText={ElitSSUAssistantStrings.elit_ai_bot}
+        headerText={"elit_icon"}
+        navigationPath={"Home"}
+        icon={""}
       />
       <ScrollView
         bounces={false}
-        className="space-y-5 mx-5 mt-3 mb-3"
+        className="space-y-5 mx-4 mt-3 mb-3"
         showsVerticalScrollIndicator={false}
       >
         {/* check if messages array is empty and show welcome message */}
         {messages.length === 0 && (
           <View className="pt-40 items-center">
-            <LottieView
-              style={{
-                height: 120,
-                alignContent: "center",
-              }}
-              source={animations.welcome_bot}
-              autoPlay
-            />
+            <TouchableOpacity>
+              <LottieView
+                style={{
+                  height: 120,
+                  alignContent: "center",
+                  paddingRight: 10,
+                  paddingLeft: 10,
+                }}
+                source={animations.welcome_bot}
+                autoPlay
+              />
+            </TouchableOpacity>
             <Text
               className="mt-3"
               style={{
-                fontFamily: "ProductSans-Black",
-                fontSize: 16,
-                fontWeight: "bold",
-                color: "grey",
+                color: "#808080",
+                fontFamily: "ProductSans-Regular",
+                fontSize: 18,
               }}
             >
               {ElitSSUAssistantStrings.chat_bot_greeting}
             </Text>
+
+            <View
+              className="mt-2"
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Text
+                className="mr-2"
+                style={{
+                  color: "#808080",
+                  fontFamily: "ProductSans-Regular",
+                  fontSize: 15,
+                }}
+              >
+                EN
+              </Text>
+              <Switch
+                trackColor={{ false: "#cbd5e1", true: "#dbeafe" }}
+                thumbColor={isEnabled ? "#7dd3fc" : "#eff6ff"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isEnabled}
+              />
+              <Text
+                className="ml-2"
+                style={{
+                  color: "#808080",
+                  fontFamily: "ProductSans-Regular",
+                  fontSize: 15,
+                }}
+              >
+                UA
+              </Text>
+            </View>
           </View>
         )}
 
@@ -114,33 +172,100 @@ export default function ChatScreen() {
         {messages.map((message, index) => {
           if (message.role === "user") {
             return (
-              <View key={index} className="flex row justify-end pl-8 pr-1">
+              <View key={index} className="flex row justify-end pl-8">
                 <View
                   style={{
                     backgroundColor: "#F5F5F5",
+                    elevation: 5,
+                    borderRadius: 20,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
                   }}
-                  className="rounded-3xl p-4 rounded-tr-none"
+                  className="rounded-3xl p-3 rounded-tr-none ml-3 mr-3"
                 >
-                  <Text>{message.content}</Text>
+                  <Text
+                    selectable={true}
+                    style={{
+                      fontFamily: "ProductSans-Regular",
+                      fontSize: 14,
+                    }}
+                  >
+                    {message.content}
+                  </Text>
                 </View>
               </View>
             );
           } else {
             return (
-              <View key={index} className="flex row justify-start pr-8 pl-1">
+              <View
+                key={index}
+                className="flex row justify-start pr-14"
+                style={{ flexDirection: "row" }}
+              >
                 <View
+                  className="mr-2"
                   style={{
-                    backgroundColor: "#bfdbfe",
+                    width: wp(9),
+                    height: hp(4.5),
                   }}
-                  className="rounded-3xl p-2 rounded-tl-none"
                 >
-                  <Text>
-                    <Text>
+                  <LinearGradient
+                    colors={["rgba(0, 255, 0, 0.5)", "rgba(0, 0, 255, 0.5)"]}
+                    start={[0, 0]}
+                    end={[1, 1]}
+                    style={{
+                      flex: 1,
+                      justifyContent: "center",
+                      alignItems: "center",
+                      borderRadius: 9999,
+                    }}
+                  >
+                    <Text
+                      style={{
+                        color: "#fff",
+                        fontFamily: "ProductSans-Bold",
+                        fontSize: 14,
+                      }}
+                    >
+                      ELiT
+                    </Text>
+                  </LinearGradient>
+                </View>
+                <View
+                  className="rounded-3xl p-2 pr-5 rounded-tl-none bg-blue-200 mt-4 mb-4"
+                  style={{
+                    elevation: 5,
+                    shadowColor: "#000",
+                    shadowOffset: {
+                      width: 0,
+                      height: 2,
+                    },
+                    shadowOpacity: 0.25,
+                    shadowRadius: 3.84,
+                  }}
+                >
+                  <TouchableOpacity
+                    //fix onPress to relevant action
+                    onPress={() => Clipboard.setStringAsync("mail@mail.com")}
+                  >
+                    <Text
+                      selectable={true}
+                      className="pb-2"
+                      style={{
+                        fontFamily: "ProductSans-Regular",
+                        fontSize: 14,
+                      }}
+                    >
                       {message.content ===
                       ElitSSUAssistantStrings.loading_message ? (
                         <LottieView
                           style={{
-                            height: 45,
+                            height: 30,
                           }}
                           source={animations.loading}
                           autoPlay
@@ -149,7 +274,7 @@ export default function ChatScreen() {
                         message.content
                       )}
                     </Text>
-                  </Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             );
@@ -157,7 +282,6 @@ export default function ChatScreen() {
         })}
       </ScrollView>
 
-      {/* input field and send button */}
       <View className="row">
         <AutoGrowingTextInput
           value={userInput}
@@ -167,6 +291,9 @@ export default function ChatScreen() {
           multiline={true}
           className="rounded-3xl p-3 left-4 bg-blue-50"
           style={{
+            color: "#808080",
+            fontFamily: "ProductSans-Regular",
+            fontSize: 15,
             width: wp(75),
             height: hp(7.5),
             shadowColor: "#000",
@@ -176,7 +303,6 @@ export default function ChatScreen() {
             },
             shadowOpacity: 0.2,
             shadowRadius: 1.41,
-
             elevation: 2,
           }}
         ></AutoGrowingTextInput>
