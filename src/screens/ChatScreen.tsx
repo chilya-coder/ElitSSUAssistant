@@ -91,16 +91,16 @@ export default function ChatScreen() {
   };
 
   return (
-    <SafeAreaView className="flex-1 pb-4 mt-0 justify-center bg-white">
+    <SafeAreaView className="flex-1 pb-4 justify-center bg-white">
       <Header
-        color={""}
+        color={"bg-blue-50"}
         headerText={"elit_icon"}
         navigationPath={"Home"}
         icon={""}
       />
       <ScrollView
         bounces={false}
-        className="space-y-5 mx-4 mt-3 mb-3"
+        className="space-y-6 mx-4 mb-3 mt-3"
         showsVerticalScrollIndicator={false}
       >
         {/* check if messages array is empty and show welcome message */}
@@ -186,13 +186,14 @@ export default function ChatScreen() {
                     shadowOpacity: 0.25,
                     shadowRadius: 3.84,
                   }}
-                  className="rounded-3xl p-3 rounded-tr-none ml-3 mr-3"
+                  className="rounded-3xl p-4 rounded-tr-none ml-3 mr-3"
                 >
                   <Text
                     selectable={true}
                     style={{
                       fontFamily: "ProductSans-Regular",
                       fontSize: 14,
+                      lineHeight: wp(5),
                     }}
                   >
                     {message.content}
@@ -237,7 +238,7 @@ export default function ChatScreen() {
                   </LinearGradient>
                 </View>
                 <View
-                  className="rounded-3xl p-2 pr-5 rounded-tl-none bg-blue-200 mt-4 mb-4"
+                  className="rounded-3xl p-4 pr-5 rounded-tl-none bg-blue-200 mt-4 mb-4"
                   style={{
                     elevation: 5,
                     shadowColor: "#000",
@@ -259,6 +260,7 @@ export default function ChatScreen() {
                       style={{
                         fontFamily: "ProductSans-Regular",
                         fontSize: 14,
+                        lineHeight: wp(5),
                       }}
                     >
                       {message.content ===
@@ -317,7 +319,7 @@ export default function ChatScreen() {
               width: 0,
               height: 1,
             },
-            shadowOpacity: 0.4,
+            shadowOpacity: 0.2,
             shadowRadius: 1.41,
             elevation: 2,
           }}
