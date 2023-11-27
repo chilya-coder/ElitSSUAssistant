@@ -18,18 +18,32 @@ export default function Option({
 }: OptionProps) {
   const navigation = useNavigation();
   return (
-    <TouchableOpacity onPress={() => navigation.navigate({ name: option })}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate({ name: option } as never)}
+    >
       <View
-        className={color + " pt-3 pb-3 pl-3 pr-3 rounded-3xl space-y-2 mt-5"}
+        className={color + " px-5 py-5 rounded-3xl space-y-5 mt-5"}
+        style={{ borderWidth: 0.5, borderColor: "#38bdf8" }}
       >
         <View className="flex-row items-center">
-          <Text style={{ fontSize: wp(4.8) }} className="font-semibold ">
+          <Text
+            style={{
+              color: "#4b5563",
+              fontSize: wp(5.5),
+              fontFamily: "ProductSans-Bold",
+            }}
+            className="font-semibold"
+          >
             {title}
           </Text>
         </View>
         <Text
-          style={{ fontSize: wp(3.8) }}
-          className="text gray-700 font-medium"
+          style={{
+            fontSize: wp(4.5),
+            color: "#808080",
+            fontFamily: "ProductSans-Regular",
+          }}
+          className="text gray-700 font-medium pr-4"
         >
           {description}
         </Text>

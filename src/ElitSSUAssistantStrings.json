@@ -1,11 +1,9 @@
 {
-    "ai_chat_option_title": "🤖 ELIT AI Chat",
-    "ai_chat_option_description": "Ask me anything about ELIT faculty.",
-    "elit_maps_option_title": "📍 ELIT Maps",
-    "elit_maps_option_description": "Find your way around ELIT faculty.",
-    "elit_assistant_options_title": "👋 Hi, I'm ELIT Hub Assistant. I can help you with:",
-    "elit_events_option_title": "📅 ELIT Events",
-    "elit_events_option_description": "Find out about upcoming ELIT events.",
+    "ai_chat_option_title": "AI Chat",
+    "ai_chat_option_description": "Ask me anything about ELIT faculty",
+    "elit_assistant_options_title": "HUB",
+    "elit_events_option_title": "Events",
+    "elit_events_option_description": "Upcoming ELIT events",
     "welcome_message": "Your gateway to your ELIT life.",
     "welcome_title": " 🇺🇦 SSU ELITHub",
     "welcome_button_message": "Get Started!",
@@ -13,7 +11,9 @@
     "send_message_placeholder": "Send a message",
     "loading_message": "Loading...",
     "request_failed": "SSUElitAPI GET sendAIRequest failed",
-    "chat_bot_greeting": "Hi! Ask me anything about ELIT.",
+    "chat_bot_greeting": "Hi! Ask me anything about ELiT.",
     "elit_ai_assistant": "ELIT AI Assistant",
-    "elit_ai_bot": "ELIT AI Bot"
+    "elit_ai_bot": "ELIT AI Bot",
+    "elit_contacts_option_title": "Contacts",
+    "elit_contacts_option_description": "Contact ELIT faculty"
 }

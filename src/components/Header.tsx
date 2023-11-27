@@ -8,14 +8,24 @@ import {
 interface HeaderProps {
   color: string;
   headerText: string;
+  navigationPath: string;
+  icon: string;
 }
-export function Header({ color, headerText }: HeaderProps) {
+export function Header({
+  color,
+  headerText,
+  navigationPath = "Home",
+  icon = "",
+}: HeaderProps) {
   const navigation = useNavigation();
   return (
     <View
       className={color}
       style={{
-        padding: hp(3),
+        paddingTop: hp(2),
+        paddingBottom: hp(2),
+        paddingLeft: wp(5),
+        paddingRight: wp(5),
       }}
     >
       <View
@@ -24,7 +34,7 @@ export function Header({ color, headerText }: HeaderProps) {
           justifyContent: "space-between",
         }}
       >
-        <TouchableOpacity onPress={() => navigation.navigate("Home")}>
+        <TouchableOpacity onPress={() => navigation.navigate(navigationPath)}>
           <Image
             className="mx-1 my-1"
             source={require("../../assets/icons/back-icon.png")}
@@ -34,6 +44,15 @@ export function Header({ color, headerText }: HeaderProps) {
             }}
           ></Image>
         </TouchableOpacity>
+        {icon && (
+          <Image
+            style={{
+              height: hp(5),
+              width: hp(5),
+            }}
+            source={icon}
+          />
+        )}
         <Text
           className="pt-1"
           style={{
