@@ -36,7 +36,7 @@ export function Header({
       >
         <TouchableOpacity onPress={() => navigation.navigate(navigationPath)}>
           <Image
-            className="mx-1 my-1"
+            className="my-1"
             source={require("../../assets/icons/back-icon.png")}
             style={{
               height: hp(3),

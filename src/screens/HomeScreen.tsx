@@ -5,7 +5,7 @@ import ListOptions from "../components/ListOptions";
 
 export default function HomeScreen() {
   return (
-    <View className="flex-1 bg-white p-6">
+    <View className="flex-1 bg-white p-12">
       <SafeAreaView className="flex-1 justify-center">
         <ListOptions />
       </SafeAreaView>

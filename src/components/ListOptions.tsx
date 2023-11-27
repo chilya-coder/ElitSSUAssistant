@@ -10,20 +10,20 @@ import icons from "../../constants/icons";
 
 export default function ListOptions() {
   return (
-    <View style={{ height: hp(130) }}>
+    <View style={{ height: hp(115) }}>
       <Text
         className="text-center mb-5 pb-3"
         style={{
           color: "#808080",
           fontFamily: "ProductSans-Bold",
-          fontSize: 40,
+          fontSize: 30,
         }}
       >
         <Image
           source={icons.elit_logo}
           style={{
-            width: wp(40),
-            height: hp(40),
+            width: wp(30),
+            height: hp(30),
             resizeMode: "contain",
             marginRight: 10,
           }}
@@ -54,13 +54,13 @@ export default function ListOptions() {
       <Text
         className="text-center"
         style={{
-          marginTop: wp(27),
+          marginTop: wp(20),
           color: "#808080",
           fontFamily: "ProductSans-Regular",
           fontSize: 17,
         }}
       >
-        (c) 2023 by Yu Chi
+        (c) 2023, yuch
       </Text>
     </View>
   );

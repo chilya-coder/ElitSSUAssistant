@@ -47,25 +47,25 @@ export default function ChatScreen() {
   };
 
   useEffect(() => {
+    // if user sends a message but reply is not yet received -
+    // generate a loading animation
     if (userPrompt !== "" && isLoading) {
-      setMessages((prevMessages) => [
-        ...prevMessages,
+      setMessages([
+        ...messages,
         { role: "bot", content: ElitSSUAssistantStrings.loading_message },
       ]);
+      // triger SSU ELIT API only if userPrompt is not empty
       ssuElitApi
-        .sendAIRequest({ prompt: userPrompt, language })
-        .then((response) => {
+        .sendAIRequest({ prompt: userPrompt, language: language })
+        .then((datatest) => {
           setIsLoading(false);
-          setMessages((prevMessages) => [
-            ...prevMessages,
-            { role: "bot", content: response.body },
-          ]);
-          console.log("AI API response: ", response.body);
+          setMessages([...messages, { role: "bot", content: datatest.body }]);
+          console.log("AI API response: ", datatest.body);
           setUserPrompt("");
         })
         .catch((error) => {
-          setMessages((prevMessages) => [
-            ...prevMessages,
+          setMessages([
+            ...messages,
             {
               role: "bot",
               content: ElitSSUAssistantStrings.internal_server_error,
@@ -93,7 +93,7 @@ export default function ChatScreen() {
   return (
     <SafeAreaView className="flex-1 pb-4 mt-0 justify-center bg-white">
       <Header
-        color={"bg-blue-50"}
+        color={""}
         headerText={"elit_icon"}
         navigationPath={"Home"}
         icon={""}
