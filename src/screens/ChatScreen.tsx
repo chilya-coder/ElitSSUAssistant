@@ -93,7 +93,7 @@ export default function ChatScreen() {
   return (
     <SafeAreaView className="flex-1 pb-4 justify-center bg-white">
       <Header
-        color={"bg-blue-50"}
+        color={""}
         headerText={"elit_icon"}
         navigationPath={"Home"}
         icon={""}
@@ -192,7 +192,7 @@ export default function ChatScreen() {
                     selectable={true}
                     style={{
                       fontFamily: "ProductSans-Regular",
-                      fontSize: 14,
+                      fontSize: 15,
                       lineHeight: wp(5),
                     }}
                   >
@@ -259,7 +259,7 @@ export default function ChatScreen() {
                       className="pb-2"
                       style={{
                         fontFamily: "ProductSans-Regular",
-                        fontSize: 14,
+                        fontSize: 15,
                         lineHeight: wp(5),
                       }}
                     >

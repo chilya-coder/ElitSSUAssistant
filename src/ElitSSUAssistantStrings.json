@@ -11,9 +11,11 @@
     "send_message_placeholder": "Send a message",
     "loading_message": "Loading...",
     "request_failed": "SSUElitAPI GET sendAIRequest failed",
-    "chat_bot_greeting": "Hi! Ask me anything about ELiT.",
+    "chat_bot_greeting": "Hi! Ask me anything about ELIT.",
     "elit_ai_assistant": "ELIT AI Assistant",
     "elit_ai_bot": "ELIT AI Bot",
     "elit_contacts_option_title": "Contacts",
-    "elit_contacts_option_description": "Contact ELIT faculty"
+    "elit_contacts_option_description": "Contact ELIT faculty",
+    "social_media_adv": "Follow us on social media and share your experience!",
+    "events_adv": "Explore ELIT events"
 }

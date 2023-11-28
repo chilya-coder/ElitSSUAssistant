@@ -21,7 +21,7 @@ export default function Option({
     <TouchableOpacity
       onPress={() => navigation.navigate({ name: option } as never)}
     >
-      <View className={color + " px-10 py-5 rounded-2xl space-y-3 mt-7"}>
+      <View className={color + " px-10 py-5 rounded-2xl space-y-2 mt-7"}>
         <View className="flex-row items-center">
           <Text
             style={{
@@ -40,7 +40,7 @@ export default function Option({
             fontFamily: "ProductSans-Regular",
             lineHeight: wp(7),
           }}
-          className="text gray-700 font-medium pr-5"
+          className="pr-5"
         >
           {description}
         </Text>

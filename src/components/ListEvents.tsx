@@ -2,7 +2,8 @@ import { View, Text, Dimensions } from "react-native";
 import React from "react";
 import Carousel from "react-native-snap-carousel";
 import { EventCard } from "./EventCard";
-let { width, height } = Dimensions.get("window");
+import ElitSSUAssistantStrings from "../ElitSSUAssistantStrings.json";
+let { width } = Dimensions.get("window");
 
 export default function ListEvents({ data }) {
   const monthNames = [
@@ -27,18 +28,18 @@ export default function ListEvents({ data }) {
     );
   };
   return (
-    <View className="mt-10 ">
+    <View className="space-y-3">
       <Text
-        className="mx-4 text-white mb-2"
+        className="mx-8 text-white mb-2"
         style={{
           fontFamily: "ProductSans-Regular",
-          fontSize: 18,
+          fontSize: 22,
         }}
       >
         {getCurrentDate()}
       </Text>
       <Text
-        className="text-white mx-4 pb-5"
+        className="text-white mx-8 mb-5"
         style={{
           fontFamily: "ProductSans-Bold",
           fontSize: 33,
@@ -48,27 +49,28 @@ export default function ListEvents({ data }) {
           textShadowRadius: 4,
         }}
       >
-        Explore ELIT events
+        {ElitSSUAssistantStrings.events_adv}
       </Text>
-      <View className="mb-5 mt-5">
+      <View className="mb-5">
         <Carousel
           data={data}
           renderItem={({ item }) => <EventCard item={item} />}
           firstItem={1}
           inactiveSlideOpacity={0.6}
           sliderWidth={width}
-          itemWidth={width * 0.8}
+          itemWidth={width * 0.79}
           slideStyle={{ display: "flex", alignItems: "center" }}
         ></Carousel>
       </View>
       <Text
-        className="px-4 mt-5 text-white "
+        className="px-8 text-white"
         style={{
           fontFamily: "ProductSans-Regular",
-          fontSize: 18,
+          fontSize: 20,
+          lineHeight: 30,
         }}
       >
-        Follow us on social media and share your experience!
+        {ElitSSUAssistantStrings.social_media_adv}
       </Text>
     </View>
   );
