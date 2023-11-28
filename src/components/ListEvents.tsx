@@ -55,7 +55,7 @@ export default function ListEvents({ data }) {
         <Carousel
           data={data}
           renderItem={({ item }) => <EventCard item={item} />}
-          firstItem={1}
+          firstItem={2}
           inactiveSlideOpacity={0.6}
           sliderWidth={width}
           itemWidth={width * 0.79}

@@ -21,18 +21,27 @@ export default function EventDetailsScreen() {
   return (
     <>
       <SafeAreaView className="flex-1 justify-center bg-sky-950">
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          style={{ marginTop: height * -0.045 }}
-        >
+        <ScrollView showsVerticalScrollIndicator={false} className="flex-1 ">
           <View>
-            <Image
-              source={require("../../assets/images/student_day.jpeg")}
-              style={{
-                width: width,
-                height: height * 0.55,
-              }}
-            />
+            <View style={{ position: "relative" }}>
+              <Image
+                source={require("../../assets/images/week_of_anime.jpeg")}
+                style={{
+                  width: width,
+                  height: height * 0.55,
+                }}
+              />
+              <View
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                }}
+              >
+                <Header color="" headerText={""} navigationPath={"Events"} />
+              </View>
+            </View>
             <LinearGradient
               colors={["transparent", "rgba(8,47,73, 1)", "rgba(8,47,73, 1)"]}
               style={{ width, height: height * 0.4 }}
@@ -41,9 +50,12 @@ export default function EventDetailsScreen() {
               className="absolute bottom-0"
             />
           </View>
-          <View style={{ marginTop: -(height * 0.2) }} className="space-y-3">
+          <View
+            style={{ marginTop: -(height * 0.2) }}
+            className="space-y-3 px-5"
+          >
             <Text
-              className="text-center tracking-wider"
+              className="text-center"
               style={{
                 textShadowColor: "rgba(0, 0, 0, 0.25)",
                 textShadowOffset: { width: 0, height: 4 },
@@ -56,36 +68,36 @@ export default function EventDetailsScreen() {
               ЧАС СВЯТКУВАТИ СТУДЕНТСТВО!
             </Text>
             <Text
-              className="text-center tracking-wider pt-4 pb-4"
+              className="text-center tracking-wider pb-4"
               style={{
                 fontFamily: "ProductSans-Regular",
-                fontSize: 19,
+                fontSize: 23,
                 color: "white",
               }}
             >
               📍Marinad 📆 16.11 🕐 17:00
             </Text>
-            <Text
-              className="text-neutral-400 mx-4 trackin-wide"
-              style={{
-                fontFamily: "ProductSans-Regular",
-                fontSize: 17,
-                color: "white",
-              }}
-            >
-              Змучився за два місяці навчання? Набридла сірість осені?😓
-              Студентство - це не лише час іспитів і заліків, а й найяскравіших
-              розваг💫 Вже давно відомо, що читабельний зміст буде заважати
-              зосередитись людині, яка оцінює композицію сторінки. Сенс
-              використання Lorem Ipsum полягає в тому, що цей текст має
-              більш-менш нормальне розподілення літер на відміну від, наприклад,
-              Це робить текст схожим на оповідний. Багато програм верстування та
-              веб-дизайну використовують Lorem Ipsum як зразок і пошук за
-              терміном "lorem ipsum" відкриє багато веб-сайтів, які знаходяться
-              ще в зародковому стані. Різні версії Lorem Ipsum з'явились за
-              минулі роки, деякі випадково, деякі було створено зумисно
-              (зокрема, жартівливі).
-            </Text>
+            <View className="bg-sky-900 px-3 py-8 rounded-2xl space-y-6">
+              <Text
+                className="mx-4"
+                style={{
+                  fontFamily: "ProductSans-Bold",
+                  fontSize: 18,
+                  color: "white",
+                }}
+              >
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry. Lorem Ipsum has been the industry's standard dummy
+                text ever since the 1500s, when an unknown printer took a galley
+                of type and scrambled it to make a type specimen book. It has
+                survived not only five centuries, but also the leap into
+                electronic typesetting, remaining essentially unchanged. It was
+                popularised in the 1960s with the release of Letraset sheets
+                containing Lorem Ipsum passages, and more recently with desktop
+                publishing software like Aldus PageMaker including versions of
+                Lorem Ipsum
+              </Text>
+            </View>
           </View>
         </ScrollView>
         <View
@@ -96,7 +108,7 @@ export default function EventDetailsScreen() {
         >
           <View style={{ justifyContent: "center", alignItems: "center" }}>
             <TouchableOpacity
-              className={"rounded-3xl"}
+              className={"rounded-3xl bg-blue-300"}
               style={{
                 width: wp(50),
                 height: hp(7),
@@ -109,7 +121,7 @@ export default function EventDetailsScreen() {
                 shadowRadius: 2,
                 elevation: 5,
                 justifyContent: "center",
-                backgroundColor: "#71b126",
+                // backgroundColor: "#71b126",
               }}
               onPress={() => console.log("Pressed")}
             >
