@@ -100,7 +100,7 @@ export default function ChatScreen() {
       />
       <ScrollView
         bounces={false}
-        className="space-y-6 mx-4 mb-3 mt-3"
+        className="space-y-4 mx-4 mb-3 mt-3"
         showsVerticalScrollIndicator={false}
       >
         {/* check if messages array is empty and show welcome message */}
@@ -238,7 +238,7 @@ export default function ChatScreen() {
                   </LinearGradient>
                 </View>
                 <View
-                  className="rounded-3xl p-4 pr-5 rounded-tl-none bg-blue-200 mt-4 mb-4"
+                  className="rounded-3xl p-3.5 pr-5 rounded-tl-none bg-blue-200 mt-4 mb-4"
                   style={{
                     elevation: 5,
                     shadowColor: "#000",
@@ -251,8 +251,7 @@ export default function ChatScreen() {
                   }}
                 >
                   <TouchableOpacity
-                    //fix onPress to relevant action
-                    onPress={() => Clipboard.setStringAsync("mail@mail.com")}
+                    onPress={() => Clipboard.setStringAsync(message.content)}
                   >
                     <Text
                       selectable={true}
@@ -267,6 +266,7 @@ export default function ChatScreen() {
                       ElitSSUAssistantStrings.loading_message ? (
                         <LottieView
                           style={{
+                            paddingRight: 5,
                             height: 30,
                           }}
                           source={animations.loading}
